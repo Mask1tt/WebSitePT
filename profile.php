@@ -57,12 +57,12 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="hello" style="text-align: center;">
                 <h1 class="hello">
                     Привет, <?php echo $_COOKIE['User']; ?>
                 </h1>
             </div>
-        <div class="col-7">
+        <div class="col-18" style="text-align: center;">
             <form class= "form_align" method="POST" action="profile.php" enctype="multipart/form-data" name="upload">
                 <input type="text" class="form" type="text" name="title" placeholder="Заголовок поста">
                 <textarea name="text" cols="30" rows="10" placeholder="Введите текст вашего поста..."></textarea>
@@ -91,18 +91,20 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
 
     if(!mysqli_query($link, $sql)) die("Не удалось добавить пост");
+
+    if(!empty($_FILES["file"]))
+    {
+        if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg") || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg") || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png") ) && (@$_FILES["file"]["size"] < 102400 ))
+        {
+            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" .$_FILES["file"]["name"]);
+            echo "Load in: " . "upload/" . $_FILES["file"]["name"];
+        }
+        else
+        {
+            echo "Upload failed!";
+        }
+    }
 }
 
-if(!empty($_FILES["file"])){
-    if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg") || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg") || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png") ) && (@$_FILES["file"]["size"] < 102400 ))
-    {
-        move_uploaded_file($_FILES["file"]["tmp-name"], "upload/" .$_FILES["file"]["name"]);
-        echo "Load in: " . "upload/" . $_FILES["file"]["name"];
-    }
-    else
-    {
-        echo "Upload failed!";
-    }
-}
 
 ?>
