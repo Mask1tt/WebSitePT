@@ -35,7 +35,7 @@
 <?php
 require_once('bd.php');
 
-$link = mysqli_connect('127.0.0.1', 'root', '11040413', 'first');
+$link = mysqli_connect('db', 'root', '11040413', 'first');
 
 if (isset($_POST['submit'])) {
     $username = $_POST['login'];

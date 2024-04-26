@@ -24,7 +24,7 @@
             <a href="/registration.php"> Зарегестрируйтесь </a> или <a href="/login.php"> войдите</a>!
         <?php
         } else {
-            $link = mysqli_connect('127.0.0.1', 'root', '11040413', 'first');
+            $link = mysqli_connect('db', 'root', '11040413', 'first');
 
             $sql = "SELECT * FROM posts";
             $res = mysqli_query($link, $sql);

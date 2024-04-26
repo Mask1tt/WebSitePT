@@ -1,5 +1,5 @@
 <?php 
-$link = mysqli_connect('127.0.0.1', 'root','11040413');
+$link = mysqli_connect('db', 'root','11040413');
 if (!$link) {
 	die('Error' . mysqli_error());
 }
